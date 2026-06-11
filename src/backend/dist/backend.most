@@ -1,0 +1,276 @@
+// Version: 1.0.0
+type AboutContent__913707180 =
+  {coreValues : [CoreValue__876829841]; organizationStory : Text};
+type BlogPost__72627970 =
+  {
+    category : Text;
+    content : Text;
+    createdAt : Int;
+    featuredImageUrl : ?Text;
+    id : Text;
+    isPublished : Bool;
+    tags : [Text];
+    title : Text
+  };
+type CoreValue__876829841 = {description : Text; title : Text};
+type DocumentCategory__624120590 =
+  {#annualReport; #auditReport; #certificate; #legal; #other; #policy};
+type Document__57377506 =
+  {
+    category : DocumentCategory__624120590;
+    createdAt : Int;
+    description : Text;
+    fileUrl : Text;
+    id : Text;
+    title : Text
+  };
+type EventRegistration__710515565 =
+  {createdAt : Int; eventId : Text; id : Text; name : Text; phone : Text};
+type Event__543096582 =
+  {
+    createdAt : Int;
+    date : Int;
+    description : Text;
+    featuredImageUrl : ?Text;
+    id : Text;
+    isCompleted : Bool;
+    isRegistrationOpen : Bool;
+    location : Text;
+    title : Text
+  };
+type ExternalBlob__671167343 = Blob;
+type GalleryCategory__142734157 = {#donor; #general};
+type GalleryItem__85588320 =
+  {
+    blob : ?ExternalBlob__671167343;
+    category : GalleryCategory__142734157;
+    createdAt : Int;
+    description : ?Text;
+    id : Text;
+    mediaType : MediaType__346103953;
+    title : ?Text;
+    updatedAt : Int;
+    url : Text
+  };
+type HomeContent__78652364 =
+  {
+    ctaButtonLink : Text;
+    ctaButtonText : Text;
+    heroSubtitle : Text;
+    heroTitle : Text;
+    missionText : Text;
+    visionText : Text
+  };
+type ImpactMedia__490373559 =
+  {blob : ?ExternalBlob__671167343; mediaType : {#image; #video}; url : Text};
+type ImpactReport__539821396 =
+  {
+    areasCoovered : Nat;
+    createdAt : Int;
+    description : Text;
+    id : Text;
+    media : [ImpactMedia__490373559];
+    reportDate : Int;
+    resolvedCases : Nat;
+    title : Text;
+    updatedAt : Int;
+    volunteerCount : Nat
+  };
+type MediaType__346103953 = {#image; #video};
+type Nat__1040412405 = Nat__920180692;
+type Nat__920180692 = Nat;
+type ProjectStatus__886440159 = {#active; #completed; #planning};
+type Project__614212307 =
+  {
+    category : Text;
+    createdAt : Int;
+    description : Text;
+    featuredImageUrl : ?Text;
+    id : Text;
+    progressPercent : Nat;
+    status : ProjectStatus__886440159;
+    title : Text
+  };
+type ReportCategory__2591946 =
+  {
+    #drainageIssue;
+    #garbage;
+    #other;
+    #publicToiletIssue;
+    #roadCleanliness;
+    #waterLogging
+  };
+type ReportStatus__445058036 = {#pending; #resolved};
+type Report__953667835 =
+  {
+    category : ReportCategory__2591946;
+    createdAt : Int;
+    description : Text;
+    district : Text;
+    id : Text;
+    imageBlob : ?ExternalBlob__671167343;
+    location : Text;
+    mobile : Text;
+    name : Text;
+    refNumber : Text;
+    status : ReportStatus__445058036;
+    updatedAt : Int
+  };
+type Settings__831483091 =
+  {
+    bankAccountHolder : ?Text;
+    bankAccountNumber : ?Text;
+    bankIfsc : ?Text;
+    contactEmail : Text;
+    contactPhone : Text;
+    founderBio : ?Text;
+    founderName : ?Text;
+    founderPhoto : ?Text;
+    location : Text;
+    socialLinks : SocialLinks__597770396;
+    upiId : ?Text;
+    upiQrImageUrl : ?Text;
+    websiteName : Text;
+    whatsappNumber : Text
+  };
+type SocialLinks__597770396 =
+  {facebook : ?Text; instagram : ?Text; twitter : ?Text; youtube : ?Text};
+type TeamMember__16370082 =
+  {
+    bio : ?Text;
+    createdAt : Int;
+    id : Text;
+    name : Text;
+    order : Nat;
+    photoUrl : ?Text;
+    role : Text;
+    updatedAt : Int
+  };
+type Testimonial__391666464 =
+  {
+    createdAt : Int;
+    id : Text;
+    isActive : Bool;
+    name : Text;
+    photoUrl : ?Text;
+    quote : Text;
+    role : Text
+  };
+type Timestamp__301639476 = Int;
+type UserId__1043627770 = Text;
+type User__98118558 =
+  {
+    createdAt : Timestamp__301639476;
+    email : Text;
+    id : UserId__1043627770;
+    name : Text;
+    photoUrl : Text
+  };
+type VolunteerApplication__305268575 =
+  {
+    availability : Text;
+    createdAt : Int;
+    email : Text;
+    id : Text;
+    mobile : Text;
+    name : Text;
+    rankingBadge : Text;
+    status : VolunteerStatus__796325291;
+    volunteerHours : Nat
+  };
+type VolunteerStatus__796325291 = {#approved; #pending; #rejected};
+actor {
+  stable adminState :
+    {
+      var passwordHash : Text;
+      var sessionTokens : [(Text, Int)];
+      var settings : Settings__831483091
+    };
+  stable blogPosts :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?BlogPost__72627970]];
+      var elementIndex : Nat__1040412405
+    };
+  stable blogState : {var nextBlogId : Nat};
+  stable contentState :
+    {
+      var aboutContent : AboutContent__913707180;
+      var homeContent : HomeContent__78652364
+    };
+  stable docState : {var nextDocId : Nat};
+  stable documents :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?Document__57377506]];
+      var elementIndex : Nat__1040412405
+    };
+  stable eventState : {var nextEventId : Nat; var nextRegId : Nat};
+  stable events :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?Event__543096582]];
+      var elementIndex : Nat__1040412405
+    };
+  stable galleryItems :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?GalleryItem__85588320]];
+      var elementIndex : Nat__1040412405
+    };
+  stable galleryState : {var nextGalleryId : Nat};
+  stable impactReports :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?ImpactReport__539821396]];
+      var elementIndex : Nat__1040412405
+    };
+  stable impactState : {var nextImpactId : Nat};
+  stable projectState : {var nextProjectId : Nat};
+  stable projects :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?Project__614212307]];
+      var elementIndex : Nat__1040412405
+    };
+  stable registrations :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?EventRegistration__710515565]];
+      var elementIndex : Nat__1040412405
+    };
+  stable reports :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?Report__953667835]];
+      var elementIndex : Nat__1040412405
+    };
+  stable state : {var nextReportCount : Nat};
+  stable teamMembers :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?TeamMember__16370082]];
+      var elementIndex : Nat__1040412405
+    };
+  stable teamState : {var nextTeamId : Nat};
+  stable testimonialState : {var nextTestimonialId : Nat};
+  stable testimonials :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?Testimonial__391666464]];
+      var elementIndex : Nat__1040412405
+    };
+  stable users :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?User__98118558]];
+      var elementIndex : Nat__1040412405
+    };
+  stable vState : {var nextVolunteerCount : Nat};
+  stable volunteers :
+    {
+      var blockIndex : Nat__1040412405;
+      var blocks : [var [var ?VolunteerApplication__305268575]];
+      var elementIndex : Nat__1040412405
+    }
+};

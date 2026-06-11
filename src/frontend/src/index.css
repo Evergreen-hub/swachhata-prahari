@@ -1,0 +1,176 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "DM Sans";
+  src: url("/assets/fonts/DMSans.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "General Sans";
+  src: url("/assets/fonts/GeneralSans.woff2") format("woff2");
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("/assets/fonts/JetBrainsMono.woff2") format("woff2");
+  font-display: swap;
+}
+
+@layer base {
+  :root {
+    --font-display: "DM Sans";
+    --font-body: "General Sans";
+    --font-mono: "JetBrains Mono";
+    --radius: 0.625rem;
+
+    --background: 0.98 0.01 143;
+    --foreground: 0.15 0.02 143;
+    --card: 1.0 0.003 143;
+    --card-foreground: 0.15 0.02 143;
+    --popover: 1.0 0.003 143;
+    --popover-foreground: 0.15 0.02 143;
+
+    --primary: 0.45 0.18 143;
+    --primary-foreground: 0.99 0.003 143;
+
+    --secondary: 0.72 0.18 50;
+    --secondary-foreground: 0.12 0.02 50;
+    --muted: 0.94 0.012 143;
+    --muted-foreground: 0.5 0.02 143;
+
+    --accent: 0.72 0.18 50;
+    --accent-foreground: 0.12 0.02 50;
+
+    --destructive: 0.55 0.22 25;
+    --destructive-foreground: 0.99 0.002 25;
+
+    --border: 0.89 0.015 143;
+    --input: 0.89 0.015 143;
+    --ring: 0.45 0.18 143;
+
+    --chart-1: 0.45 0.18 143;
+    --chart-2: 0.72 0.18 50;
+    --chart-3: 0.55 0.15 200;
+    --chart-4: 0.65 0.14 80;
+    --chart-5: 0.75 0.12 120;
+
+    --sidebar: 0.96 0.012 143;
+    --sidebar-foreground: 0.15 0.02 143;
+    --sidebar-primary: 0.45 0.18 143;
+    --sidebar-primary-foreground: 0.99 0.003 143;
+    --sidebar-accent: 0.91 0.018 50;
+    --sidebar-accent-foreground: 0.15 0.02 50;
+    --sidebar-border: 0.89 0.015 143;
+    --sidebar-ring: 0.45 0.18 143;
+  }
+
+  .dark {
+    --background: 0.13 0.015 143;
+    --foreground: 0.96 0.01 143;
+    --card: 0.17 0.015 143;
+    --card-foreground: 0.96 0.01 143;
+    --popover: 0.2 0.015 143;
+    --popover-foreground: 0.96 0.01 143;
+
+    --primary: 0.68 0.18 143;
+    --primary-foreground: 0.13 0.01 143;
+
+    --secondary: 0.78 0.16 50;
+    --secondary-foreground: 0.13 0.01 50;
+    --muted: 0.2 0.015 143;
+    --muted-foreground: 0.6 0.015 143;
+
+    --accent: 0.78 0.16 50;
+    --accent-foreground: 0.13 0.01 50;
+
+    --destructive: 0.62 0.2 22;
+    --destructive-foreground: 0.99 0.002 22;
+
+    --border: 0.26 0.015 143;
+    --input: 0.26 0.015 143;
+    --ring: 0.68 0.18 143;
+
+    --chart-1: 0.68 0.18 143;
+    --chart-2: 0.78 0.16 50;
+    --chart-3: 0.6 0.14 200;
+    --chart-4: 0.7 0.13 80;
+    --chart-5: 0.75 0.11 120;
+
+    --sidebar: 0.17 0.015 143;
+    --sidebar-foreground: 0.96 0.01 143;
+    --sidebar-primary: 0.68 0.18 143;
+    --sidebar-primary-foreground: 0.13 0.01 143;
+    --sidebar-accent: 0.22 0.018 50;
+    --sidebar-accent-foreground: 0.88 0.01 50;
+    --sidebar-border: 0.26 0.015 143;
+    --sidebar-ring: 0.68 0.18 143;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .hero-gradient {
+    background: linear-gradient(
+      135deg,
+      oklch(0.22 0.08 143) 0%,
+      oklch(0.35 0.12 143) 50%,
+      oklch(0.22 0.06 160) 100%
+    );
+  }
+  .section-alt {
+    background-color: oklch(var(--muted) / 0.4);
+  }
+  .text-gradient-primary {
+    background: linear-gradient(
+      90deg,
+      oklch(var(--primary)),
+      oklch(var(--secondary))
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .card-hover {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .card-hover:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px -4px oklch(var(--primary) / 0.15);
+  }
+}
+
+.accent-line {
+  border-bottom: 3px solid oklch(var(--accent));
+  padding-bottom: 0.5rem;
+}
+
+.button-primary {
+  background-color: oklch(var(--primary));
+  color: oklch(var(--primary-foreground));
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.button-primary:hover {
+  opacity: 0.9;
+}
+
+.button-secondary {
+  background-color: oklch(var(--secondary));
+  color: oklch(var(--secondary-foreground));
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.button-secondary:hover {
+  opacity: 0.9;
+}

@@ -1,0 +1,29 @@
+{
+  "name": "Swachhata Prahari",
+  "short_name": "Swachhata Prahari",
+  "description": "Report garbage, drainage and cleanliness issues in Sitamarhi and Muzaffarpur. Join Swachhata Prahari and help create a cleaner Bihar.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#008000",
+  "orientation": "any",
+  "icons": [
+    {
+      "src": "/favicon.png",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/logo-circular.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/logo-circular.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["government", "utilities"],
+  "lang": "hi-IN"
+}

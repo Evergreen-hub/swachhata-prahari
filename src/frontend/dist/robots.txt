@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /admin/dashboard
+Disallow: /admin/reports
+Disallow: /admin/gallery
+Disallow: /admin/settings
+
+Sitemap: https://swachtaprahari.ic0.app/sitemap.xml

@@ -1,0 +1,27 @@
+{
+  "overview": "Swachhata Prahari is a citizen-driven cleanliness reporting NGO platform for Bihar with dynamic admin management, projects, events, blog, and volunteer system.",
+  "features": [
+    "Report cleanliness issues with photo and location",
+    "Projects page with progress tracking",
+    "Events listing with registration",
+    "Blog and news section",
+    "Volunteer registration and management",
+    "Gallery with photos and videos",
+    "Admin panel to manage all content",
+    "Donation page with UPI and QR code",
+    "Impact statistics and reports",
+    "Documents and reports section"
+  ],
+  "category": "ngo-platform",
+  "tags": [
+    "ngo",
+    "civic",
+    "cleanliness",
+    "bihar",
+    "hindi",
+    "admin-panel",
+    "volunteer",
+    "donations"
+  ],
+  "last_updated": "2026-06-11T12:56:32.047Z"
+}

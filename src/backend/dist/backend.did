@@ -1,0 +1,496 @@
+type _ImmutableObjectStorageRefillResult = 
+ record {
+   success: opt bool;
+   topped_up_amount: opt nat;
+ };
+type _ImmutableObjectStorageRefillInformation = record {
+                                                  proposed_top_up_amount:
+                                                   opt nat;};
+type _ImmutableObjectStorageCreateCertificateResult = 
+ record {
+   blob_hash: text;
+   method: text;
+ };
+type VolunteerStatus = 
+ variant {
+   approved;
+   pending;
+   rejected;
+ };
+type VolunteerApplication = 
+ record {
+   availability: text;
+   createdAt: int;
+   email: text;
+   id: text;
+   mobile: text;
+   name: text;
+   rankingBadge: text;
+   status: VolunteerStatus;
+   volunteerHours: nat;
+ };
+type UserId = text;
+type User = 
+ record {
+   createdAt: Timestamp;
+   email: text;
+   id: UserId;
+   name: text;
+   photoUrl: text;
+ };
+type UpdateTestimonialRequest = 
+ record {
+   id: text;
+   isActive: opt bool;
+   name: opt text;
+   photoUrl: opt text;
+   quote: opt text;
+   role: opt text;
+ };
+type UpdateTeamMemberRequest = 
+ record {
+   bio: opt text;
+   id: text;
+   name: opt text;
+   order: opt nat;
+   photoUrl: opt text;
+   role: opt text;
+ };
+type UpdateProjectRequest = 
+ record {
+   category: opt text;
+   description: opt text;
+   featuredImageUrl: opt text;
+   id: text;
+   progressPercent: opt nat;
+   status: opt ProjectStatus;
+   title: opt text;
+ };
+type UpdateImpactReportRequest = 
+ record {
+   areasCoovered: opt nat;
+   description: opt text;
+   id: text;
+   media: opt vec ImpactMedia;
+   reportDate: opt int;
+   resolvedCases: opt nat;
+   title: opt text;
+   volunteerCount: opt nat;
+ };
+type UpdateGalleryItemRequest = 
+ record {
+   "blob": opt ExternalBlob;
+   category: opt GalleryCategory;
+   description: opt text;
+   id: text;
+   title: opt text;
+   url: opt text;
+ };
+type UpdateEventRequest = 
+ record {
+   date: opt int;
+   description: opt text;
+   featuredImageUrl: opt text;
+   id: text;
+   isCompleted: opt bool;
+   isRegistrationOpen: opt bool;
+   location: opt text;
+   title: opt text;
+ };
+type UpdateBlogPostRequest = 
+ record {
+   category: opt text;
+   content: opt text;
+   featuredImageUrl: opt text;
+   id: text;
+   isPublished: opt bool;
+   tags: opt vec text;
+   title: opt text;
+ };
+type Timestamp = int;
+type Testimonial = 
+ record {
+   createdAt: int;
+   id: text;
+   isActive: bool;
+   name: text;
+   photoUrl: opt text;
+   quote: text;
+   role: text;
+ };
+type TeamMember = 
+ record {
+   bio: opt text;
+   createdAt: int;
+   id: text;
+   name: text;
+   order: nat;
+   photoUrl: opt text;
+   role: text;
+   updatedAt: int;
+ };
+type SubmitReportRequest = 
+ record {
+   category: ReportCategory;
+   description: text;
+   district: text;
+   imageBlob: opt ExternalBlob;
+   location: text;
+   mobile: text;
+   name: text;
+ };
+type Stats = 
+ record {
+   pending: nat;
+   resolved: nat;
+   total: nat;
+   volunteers: nat;
+ };
+type SocialLinks = 
+ record {
+   facebook: opt text;
+   instagram: opt text;
+   twitter: opt text;
+   youtube: opt text;
+ };
+type Settings = 
+ record {
+   bankAccountHolder: opt text;
+   bankAccountNumber: opt text;
+   bankIfsc: opt text;
+   contactEmail: text;
+   contactPhone: text;
+   founderBio: opt text;
+   founderName: opt text;
+   founderPhoto: opt text;
+   location: text;
+   socialLinks: SocialLinks;
+   upiId: opt text;
+   upiQrImageUrl: opt text;
+   websiteName: text;
+   whatsappNumber: text;
+ };
+type ReportStatus = 
+ variant {
+   pending;
+   resolved;
+ };
+type ReportCategory = 
+ variant {
+   drainageIssue;
+   garbage;
+   other;
+   publicToiletIssue;
+   roadCleanliness;
+   waterLogging;
+ };
+type Report = 
+ record {
+   category: ReportCategory;
+   createdAt: int;
+   description: text;
+   district: text;
+   id: text;
+   imageBlob: opt ExternalBlob;
+   location: text;
+   mobile: text;
+   name: text;
+   refNumber: text;
+   status: ReportStatus;
+   updatedAt: int;
+ };
+type RegisterForEventRequest = 
+ record {
+   eventId: text;
+   name: text;
+   phone: text;
+ };
+type ProjectStatus = 
+ variant {
+   active;
+   completed;
+   planning;
+ };
+type Project = 
+ record {
+   category: text;
+   createdAt: int;
+   description: text;
+   featuredImageUrl: opt text;
+   id: text;
+   progressPercent: nat;
+   status: ProjectStatus;
+   title: text;
+ };
+type MediaType = 
+ variant {
+   image;
+   video;
+ };
+type ImpactReport = 
+ record {
+   areasCoovered: nat;
+   createdAt: int;
+   description: text;
+   id: text;
+   media: vec ImpactMedia;
+   reportDate: int;
+   resolvedCases: nat;
+   title: text;
+   updatedAt: int;
+   volunteerCount: nat;
+ };
+type ImpactMedia = 
+ record {
+   "blob": opt ExternalBlob;
+   mediaType: variant {
+                image;
+                video;
+              };
+   url: text;
+ };
+type HomeContent = 
+ record {
+   ctaButtonLink: text;
+   ctaButtonText: text;
+   heroSubtitle: text;
+   heroTitle: text;
+   missionText: text;
+   visionText: text;
+ };
+type GalleryItem = 
+ record {
+   "blob": opt ExternalBlob;
+   category: GalleryCategory;
+   createdAt: int;
+   description: opt text;
+   id: text;
+   mediaType: MediaType;
+   title: opt text;
+   updatedAt: int;
+   url: text;
+ };
+type GalleryCategory = 
+ variant {
+   donor;
+   general;
+ };
+type ExternalBlob = blob;
+type EventRegistration = 
+ record {
+   createdAt: int;
+   eventId: text;
+   id: text;
+   name: text;
+   phone: text;
+ };
+type Event = 
+ record {
+   createdAt: int;
+   date: int;
+   description: text;
+   featuredImageUrl: opt text;
+   id: text;
+   isCompleted: bool;
+   isRegistrationOpen: bool;
+   location: text;
+   title: text;
+ };
+type EditReportRequest = 
+ record {
+   category: opt ReportCategory;
+   description: opt text;
+   district: opt text;
+   id: text;
+   imageBlob: opt ExternalBlob;
+   location: opt text;
+   mobile: opt text;
+   name: opt text;
+ };
+type DocumentCategory = 
+ variant {
+   annualReport;
+   auditReport;
+   certificate;
+   legal;
+   other;
+   policy;
+ };
+type Document = 
+ record {
+   category: DocumentCategory;
+   createdAt: int;
+   description: text;
+   fileUrl: text;
+   id: text;
+   title: text;
+ };
+type CoreValue = 
+ record {
+   description: text;
+   title: text;
+ };
+type BlogPost = 
+ record {
+   category: text;
+   content: text;
+   createdAt: int;
+   featuredImageUrl: opt text;
+   id: text;
+   isPublished: bool;
+   tags: vec text;
+   title: text;
+ };
+type AddTestimonialRequest = 
+ record {
+   isActive: bool;
+   name: text;
+   photoUrl: opt text;
+   quote: text;
+   role: text;
+ };
+type AddTeamMemberRequest = 
+ record {
+   bio: opt text;
+   name: text;
+   order: nat;
+   photoUrl: opt text;
+   role: text;
+ };
+type AddProjectRequest = 
+ record {
+   category: text;
+   description: text;
+   featuredImageUrl: opt text;
+   progressPercent: nat;
+   status: ProjectStatus;
+   title: text;
+ };
+type AddImpactReportRequest = 
+ record {
+   areasCoovered: nat;
+   description: text;
+   media: vec ImpactMedia;
+   reportDate: int;
+   resolvedCases: nat;
+   title: text;
+   volunteerCount: nat;
+ };
+type AddGalleryItemRequest = 
+ record {
+   "blob": opt ExternalBlob;
+   category: GalleryCategory;
+   description: opt text;
+   mediaType: MediaType;
+   title: opt text;
+   url: text;
+ };
+type AddEventRequest = 
+ record {
+   date: int;
+   description: text;
+   featuredImageUrl: opt text;
+   isCompleted: bool;
+   isRegistrationOpen: bool;
+   location: text;
+   title: text;
+ };
+type AddDocumentRequest = 
+ record {
+   category: DocumentCategory;
+   description: text;
+   fileUrl: text;
+   title: text;
+ };
+type AddBlogPostRequest = 
+ record {
+   category: text;
+   content: text;
+   featuredImageUrl: opt text;
+   isPublished: bool;
+   tags: vec text;
+   title: text;
+ };
+type AboutContent = 
+ record {
+   coreValues: vec CoreValue;
+   organizationStory: text;
+ };
+service : {
+  _immutableObjectStorageBlobsAreLive: (hashes: vec blob) -> (vec bool) query;
+  _immutableObjectStorageBlobsToDelete: () -> (vec blob) query;
+  _immutableObjectStorageConfirmBlobDeletion: (blobs: vec blob) -> ();
+  _immutableObjectStorageCreateCertificate: (blobHash: text) ->
+   (_ImmutableObjectStorageCreateCertificateResult);
+  _immutableObjectStorageRefillCashier: (refillInformation:
+   opt _ImmutableObjectStorageRefillInformation) ->
+   (_ImmutableObjectStorageRefillResult);
+  _immutableObjectStorageUpdateGatewayPrincipals: () -> ();
+  addBlogPost: (req: AddBlogPostRequest) -> (BlogPost);
+  addDocument: (req: AddDocumentRequest) -> (Document);
+  addEvent: (req: AddEventRequest) -> (Event);
+  addGalleryItem: (token: text, req: AddGalleryItemRequest) ->
+   (opt GalleryItem);
+  addImpactReport: (token: text, req: AddImpactReportRequest) ->
+   (opt ImpactReport);
+  addProject: (req: AddProjectRequest) -> (Project);
+  addTeamMember: (token: text, req: AddTeamMemberRequest) -> (opt TeamMember);
+  addTestimonial: (req: AddTestimonialRequest) -> (Testimonial);
+  adminLogin: (username: text, password: text) -> (opt text);
+  adminLogout: (token: text) -> (bool);
+  deleteBlogPost: (id: text) -> (bool);
+  deleteDocument: (id: text) -> (bool);
+  deleteEvent: (id: text) -> (bool);
+  deleteGalleryItem: (token: text, id: text) -> (bool);
+  deleteImpactReport: (token: text, id: text) -> (bool);
+  deleteProject: (id: text) -> (bool);
+  deleteReport: (id: text) -> (bool);
+  deleteTeamMember: (token: text, id: text) -> (bool);
+  deleteTestimonial: (id: text) -> (bool);
+  deleteUser: (id: text) -> (bool);
+  deleteVolunteerApplication: (id: text) -> (bool);
+  editReport: (req: EditReportRequest) -> (opt Report);
+  getAboutContent: () -> (AboutContent) query;
+  getAllUsers: () -> (vec User) query;
+  getBlogPost: (id: text) -> (opt BlogPost) query;
+  getBlogPosts: () -> (vec BlogPost);
+  getDocuments: () -> (vec Document);
+  getDonorGalleryItems: () -> (vec GalleryItem) query;
+  getEventRegistrations: (eventId: text) -> (vec EventRegistration);
+  getEvents: () -> (vec Event);
+  getGalleryItems: () -> (vec GalleryItem) query;
+  getHomeContent: () -> (HomeContent) query;
+  getImpactReport: (id: text) -> (opt ImpactReport) query;
+  getImpactReports: () -> (vec ImpactReport) query;
+  getProjects: () -> (vec Project);
+  getPublicGalleryItems: () -> (vec GalleryItem) query;
+  getReport: (id: text) -> (opt Report) query;
+  getReports: () -> (vec Report) query;
+  getSettings: () -> (Settings) query;
+  getStats: () -> (Stats) query;
+  getTeamMembers: () -> (vec TeamMember) query;
+  getTestimonials: () -> (vec Testimonial);
+  getUserById: (id: text) -> (opt User) query;
+  getVolunteerApplications: () -> (vec VolunteerApplication) query;
+  registerForEvent: (req: RegisterForEventRequest) -> (EventRegistration);
+  registerOrUpdateUser: (user: User) -> (User);
+  saveSettings: (token: text, settings: Settings) -> (bool);
+  submitReport: (req: SubmitReportRequest) -> (Report);
+  submitVolunteerApplication: (name: text, mobile: text, email: text,
+   availability: text) -> (VolunteerApplication);
+  updateAboutContent: (content: AboutContent) -> (bool);
+  updateBlogPost: (req: UpdateBlogPostRequest) -> (opt BlogPost);
+  updateEvent: (req: UpdateEventRequest) -> (opt Event);
+  updateGalleryItem: (token: text, req: UpdateGalleryItemRequest) ->
+   (opt GalleryItem);
+  updateHomeContent: (content: HomeContent) -> (bool);
+  updateImpactReport: (token: text, req: UpdateImpactReportRequest) ->
+   (opt ImpactReport);
+  updateProject: (req: UpdateProjectRequest) -> (opt Project);
+  updateReportStatus: (id: text, status: ReportStatus) -> (bool);
+  updateTeamMember: (token: text, req: UpdateTeamMemberRequest) ->
+   (opt TeamMember);
+  updateTestimonial: (req: UpdateTestimonialRequest) -> (opt Testimonial);
+  updateVolunteerHours: (id: text, hours: nat) -> (bool);
+  updateVolunteerStatus: (id: text, status: VolunteerStatus) -> (bool);
+}
